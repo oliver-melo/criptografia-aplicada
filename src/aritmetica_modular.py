@@ -1,3 +1,4 @@
+from MDC_ExponenciacaoModular import MDC
 from euclides_estendido import euclides_estendido
 
 class NumeroModular:
@@ -59,6 +60,30 @@ class NumeroModular:
 
         return self.__mul__(inverso_other)
 
+    def __pow__(self, other: int) -> int:
+        """Calcula (base ** expoente) mod modulo usando 'square and multiply'."""
+
+        base = NumeroModular(self.num, self.mod)
+        expoente = other
+
+        if other < 0:
+            inverso = base.inverso_multiplicativo()
+            if inverso is None:
+                raise ValueError(f"O inverso multiplicativo de {base.num_mod} não existe no módulo {base.mod}.")
+            base = inverso
+            expoente = -other
+            
+        resultado = NumeroModular(1, self.mod)
+
+        while expoente > 0:
+            if expoente % 2 == 1:
+                resultado = (resultado * base)
+            base = (base * base)
+            expoente = expoente // 2
+
+        return resultado
+
+
     def congruente(self, other: 'NumeroModular') -> bool:
         """
         Verifica se dois números modulares são congruentes.
@@ -67,3 +92,5 @@ class NumeroModular:
             raise ValueError("Os módulos devem ser iguais para a operação.")
 
         return self.num_mod == other.num_mod
+
+    
