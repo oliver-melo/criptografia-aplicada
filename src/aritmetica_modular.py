@@ -1,4 +1,4 @@
-from euclides_estendido import euclides_estendido
+from fundamentos import euclides_estendido
 
 class NumeroModular:
     """Classe para representar números em espaços modulares."""
