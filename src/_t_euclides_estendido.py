@@ -1,5 +1,4 @@
-from euclides_estendido import euclides_estendido 
-from aritmetica_modular import NumeroModular as nMod
+from fundamentos import euclides_estendido 
 
 mdc, x, y = euclides_estendido(7, 3)
 
