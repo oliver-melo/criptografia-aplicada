@@ -1,4 +1,4 @@
-from aritmetica_modular import NumeroModular as nMod 
+from numero_modular import NumeroModular as nMod 
 
 mod = 7
 
