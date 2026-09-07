@@ -1,8 +1,13 @@
 import math
 
 def mdc(a: int, b: int) -> int:
-    if (a.is_integer() == False) or (b.is_integer() == False):
+    """
+    Calcula MDC utilizando o algoritmo de Euclides.
+    """
+
+    if not isinstance(a, int) or not isinstance(b, int):
         raise ValueError("MDC só é definido para números inteiros.")
+
     a, b = abs(a), abs(b)
     while b != 0:
         a, b = b, a % b
@@ -41,16 +46,16 @@ def is_coprime(a: int, b: int) -> bool:
     """
     return mdc(a, b) == 1
 
-def euclides_estendido(a, b):
+def euclides_estendido(a: int, b: int):
     """
     calcula o MDC de a e b e encontra os coeficientes x e y que satisfazem
     a*x + b*y = MDC(a,b).
     """
 
-    if (a.is_integer() == False) or (b.is_integer() == False):
+    if not isinstance(a, int) or not isinstance(b, int):
         raise ValueError("MDC só é definido para números inteiros.")
 
-    def _calc(a, b):
+    def _calc(a: int, b: int) -> tuple[int, int, int]:
         if b == 0:
             return a, 1, 0
         mdc, x1, y1 = _calc(b, a % b)
