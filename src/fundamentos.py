@@ -1,4 +1,3 @@
-import random
 import math
 
 def mdc(a: int, b: int) -> int:
