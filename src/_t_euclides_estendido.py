@@ -1,4 +1,4 @@
-from fundamentos import euclides_estendido 
+from algoritmos import euclides_estendido 
 
 mdc, x, y = euclides_estendido(7, 3)
 
