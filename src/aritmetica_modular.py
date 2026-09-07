@@ -1,8 +1,7 @@
-from MDC_ExponenciacaoModular import MDC
 from euclides_estendido import euclides_estendido
 
 class NumeroModular:
-    """Implementa as operações fundamentais em espaços modulares."""
+    """Classe para representar números em espaços modulares."""
     
     def __init__(self, num: int, mod: int):
         if mod <= 0:
@@ -17,13 +16,22 @@ class NumeroModular:
     def __str__(self):
         return f"{self.num} (mod {self.mod})"
 
+    """Implementa operações modulares básicas: soma, subtração e multiplicação."""
+
     def __eq__(self, other):
         if isinstance(other, NumeroModular):
             return self.num == other.num and self.mod == other.mod
         return False
 
-    """Implementa operações modulares básicas: soma, subtração e multiplicação."""
+    def congruente(self, other: 'NumeroModular') -> bool:
+        """
+        Verifica se dois números modulares são congruentes.
+        """
+        if self.mod != other.mod:
+            raise ValueError("Os módulos devem ser iguais para a operação.")
 
+        return self.num_mod == other.num_mod
+ 
     def __add__(self, other):
         if isinstance(other, NumeroModular):
             if self.mod != other.mod:
@@ -82,15 +90,3 @@ class NumeroModular:
             expoente = expoente // 2
 
         return resultado
-
-
-    def congruente(self, other: 'NumeroModular') -> bool:
-        """
-        Verifica se dois números modulares são congruentes.
-        """
-        if self.mod != other.mod:
-            raise ValueError("Os módulos devem ser iguais para a operação.")
-
-        return self.num_mod == other.num_mod
-
-    
