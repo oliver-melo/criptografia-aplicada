@@ -1,4 +1,4 @@
-from algoritmos import euclides_estendido
+from algoritmos_fundamentais import euclides_estendido
 
 class NumeroModular:
     """Classe para representar números em espaços modulares."""
