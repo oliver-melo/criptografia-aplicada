@@ -72,3 +72,69 @@ def euclides_estendido(a: int, b: int):
     if b < 0: y = -y
 
     return mdc, x, y
+
+def fatoracao_prima(n: int) -> dict[int, int]:
+    """
+    Fatora n em seus primos, retornando um dicionário {primo: expoente}.
+
+    """
+
+    if not isinstance(n, int) or isinstance(n, bool):
+        raise ValueError("A fatoração só é definida para números inteiros.")
+    if n < 2:
+        return {}
+
+    fatores: dict[int, int] = {}
+    resto = n
+
+    divisor = 2
+    while divisor * divisor <= resto:
+        while resto % divisor == 0:
+            fatores[divisor] = fatores.get(divisor, 0) + 1
+            resto //= divisor
+        divisor += 1 if divisor == 2 else 2  # 2, depois só ímpares
+
+    if resto > 1:
+        fatores[resto] = fatores.get(resto, 0) + 1
+
+    return fatores
+
+
+def totiente_euler(n: int) -> int:
+    """
+    Função φ (totiente) de Euler: quantidade de inteiros em [1, n]
+    que são coprimos com n.
+
+    Implementada pela fórmula do produto sobre os fatores primos
+    distintos de n:
+
+        φ(n) = n * Π (1 - 1/p),  para cada primo p que divide n
+
+
+    """
+
+    if not isinstance(n, int) or isinstance(n, bool):
+        raise ValueError("A função φ de Euler só é definida para números inteiros.")
+    if n < 1:
+        raise ValueError("A função φ de Euler só é definida para inteiros positivos.")
+
+    resultado = n
+    for primo in fatoracao_prima(n):
+        resultado -= resultado // primo
+
+    return resultado  # φ(1) = 1, pois 1 não possui fatores primos
+
+
+def totiente_euler_ingenuo(n: int) -> int:
+    """
+    Versão didática da função φ: conta diretamente quantos k em [1, n]
+    satisfazem mdc(k, n) = 1.
+
+    """
+
+    if not isinstance(n, int) or isinstance(n, bool):
+        raise ValueError("A função φ de Euler só é definida para números inteiros.")
+    if n < 1:
+        raise ValueError("A função φ de Euler só é definida para inteiros positivos.")
+
+    return sum(1 for k in range(1, n + 1) if is_coprime(k, n))
