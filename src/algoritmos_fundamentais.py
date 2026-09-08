@@ -1,6 +1,5 @@
 import math
 
-
 def mdc(a: int, b: int) -> int:
     """
     Calcula MDC utilizando o algoritmo de Euclides.
@@ -22,23 +21,18 @@ def is_prime(n: int) -> bool:
     """
 
     if n <= 1: return False
-    if n <= 3: return True
-    if n % 2 == 0 or n % 3 == 0: return False
     
     """
     Otimização:
-    verifica apenas números da forma 6k ± 1
-    até a raiz quadrada de n.
-    Reduz função f(n) = n
-    para f(n) = (√n)*2/6 = (√n)/3;
-    Reduz complexidade de O(n)
-    para O(√n).
+    verifica até a raiz quadrada de n.
+    Reduz função f(n) = n; complexidade de O(n)
+    para f(n) = (√n); complexidade O(√n).
     """
-    i = 6
+    i = 2
     while math.isqrt(n) >= i:
-        if n % (i - 1) == 0 or n % (i + 1) == 0:
+        if n % i == 0:
             return False
-        i += 6
+        i += 1
     return True
 
 def is_coprime(a: int, b: int) -> bool:
@@ -99,7 +93,6 @@ def fatoracao_prima(n: int) -> dict[int, int]:
 
     return fatores
 
-
 def totiente_euler(n: int) -> int:
     """
     Função φ (totiente) de Euler: quantidade de inteiros em [1, n]
@@ -123,7 +116,6 @@ def totiente_euler(n: int) -> int:
         resultado -= resultado // primo
 
     return resultado  # φ(1) = 1, pois 1 não possui fatores primos
-
 
 def totiente_euler_ingenuo(n: int) -> int:
     """
