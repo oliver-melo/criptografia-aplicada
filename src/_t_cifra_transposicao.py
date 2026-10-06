@@ -1,4 +1,4 @@
-from src.cifra_transposicao import cifrar, decifrar
+from cifra_transposicao import cifrar, decifrar
 
 texto = "TRANSFERIR DOCUMENTO PARA SERVIDOR CENTRAL"
 chave = 5

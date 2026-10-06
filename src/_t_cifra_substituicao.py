@@ -1,4 +1,4 @@
-from src.cifra_substituicao import cifrar, decifrar
+from cifra_substituicao import cifrar, decifrar
 
 
 chave = "QWERTYUIOPASDFGHJKLZXCVBNM"
