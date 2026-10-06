@@ -1,4 +1,4 @@
-from metodos_cifragem import cesar, cifrar_hill, decifrar_cesar, decifrar_hill
+from metodos_cifragem import cesar
 
 # Cifra de Cesar
 mensagem = "Ataque Amanha"
