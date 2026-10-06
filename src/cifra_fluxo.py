@@ -74,7 +74,6 @@ class LFSR:
 
         raise ValueError(f"Período maior que o limite de {limite} passos.")
 
-
 def cifrar(dados: bytes, semente: int, polinomio: list[int], tamanho: int) -> bytes:
 
     if not isinstance(dados, (bytes, bytearray)):
@@ -85,16 +84,13 @@ def cifrar(dados: bytes, semente: int, polinomio: list[int], tamanho: int) -> by
 
     return bytes(d ^ k for d, k in zip(dados, keystream))
 
-
 def decifrar(dados: bytes, semente: int, polinomio: list[int], tamanho: int) -> bytes:
     """Idêntica a cifrar(): no XOR, a operação é sua própria inversa."""
     return cifrar(dados, semente, polinomio, tamanho)
 
-
 def cifrar_texto(texto: str, semente: int, polinomio: list[int], tamanho: int) -> bytes:
     """Cifra uma string, convertida para bytes em UTF-8."""
     return cifrar(texto.encode("utf-8"), semente, polinomio, tamanho)
-
 
 def decifrar_texto(dados: bytes, semente: int, polinomio: list[int], tamanho: int) -> str:
     """Decifra bytes e reconstrói a string original."""
