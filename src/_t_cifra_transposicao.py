@@ -1,10 +1,10 @@
-from cifra_transposicao import cifrar, decifrar
+from metodos_cifragem import transposicao
 
 texto = "TRANSFERIR DOCUMENTO PARA SERVIDOR CENTRAL"
 chave = 5
 
-cifrado = cifrar(texto, chave)
-decifrado = decifrar(cifrado, chave)
+cifrado = transposicao(texto, chave, True)
+decifrado = transposicao(cifrado, chave, True)
 
 print("texto original:")
 print(texto)

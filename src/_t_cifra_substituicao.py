@@ -1,12 +1,11 @@
-from cifra_substituicao import cifrar, decifrar
-
+from metodos_cifragem import substituicao
 
 chave = "QWERTYUIOPASDFGHJKLZXCVBNM"
 
 texto = "TRANSFERIR DOCUMENTO PARA SERVIDOR CENTRAL"
 
-cifrado = cifrar(texto, chave)
-decifrado = decifrar(cifrado, chave)
+cifrado = substituicao(texto, chave, True)
+decifrado = substituicao(cifrado, chave, False)
 
 print("Texto original:")
 print(texto)
