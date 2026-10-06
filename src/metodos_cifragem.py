@@ -1,13 +1,15 @@
-ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-
-def cifrar(texto: str, chave: str) -> str:
+def substituicao(texto: str, chave: str, modo: bool) -> str:
     """
-    cifra um texto utilizando uma cifra de substituição.
-
+    Método da substituição: 
     cada letra do alfabeto é substituída pela letra
     correspondente na chave.
+    
+    modo True cifra
+    modo False decifra
     """
+
+    ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     if not isinstance(texto, str) or not isinstance(chave, str):
         raise ValueError("testo e chave devem ser strings")
@@ -24,6 +26,7 @@ def cifrar(texto: str, chave: str) -> str:
         raise ValueError("a chave deve conter somente letras")
 
     resultado = ""
+
 
     for caractere in texto:
         if caractere.upper() in ALFABETO:
