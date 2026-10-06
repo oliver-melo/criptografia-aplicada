@@ -1,3 +1,31 @@
+"""Implementacao da cifra de Cesar."""
+
+def cesar(texto: str, chave: int, modo: bool) -> str:
+
+    if not isinstance(texto, str):
+        raise ValueError("o texto deve ser uma string")
+
+    if not isinstance(chave, int):
+        raise ValueError("a chave deve ser um número inteiro")
+
+    def _deslocar_caractere(caractere: str, deslocamento: int) -> str:
+        if "A" <= caractere <= "Z":
+            inicio = ord("A")
+        elif "a" <= caractere <= "z":
+            inicio = ord("a")
+        else:
+            return caractere
+
+        return chr((ord(caractere) - inicio + deslocamento) % 26 + inicio)
+
+    """
+    Se modo True, avanca cada letra pelo numero de posicoes informado.
+    Se modo False, retrocede cada letra pelo numero de posicoes informado.
+    """
+    deslocamento = chave if modo else -chave
+
+    return "".join(_deslocar_caractere(c, deslocamento) for c in texto)
+
 def substituicao(texto: str, chave: str, modo: bool) -> str:
     """
     Método da substituição: 
@@ -11,7 +39,7 @@ def substituicao(texto: str, chave: str, modo: bool) -> str:
     ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     if not isinstance(texto, str) or not isinstance(chave, str):
-        raise ValueError("testo e chave devem ser strings")
+        raise ValueError("texto e chave devem ser strings")
 
     chave =  chave.upper()
 
