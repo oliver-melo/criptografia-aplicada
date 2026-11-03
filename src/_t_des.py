@@ -1,16 +1,9 @@
-"""Testes e demonstração da biblioteca des.py para a Missão 3 do SecureDocs."""
+"""Testes e demonstração da classe DES de cifras_modernas.py para a Missão 3 do SecureDocs."""
 
 from pathlib import Path
 import tempfile
 
-from des import (
-    decrypt_block,
-    decrypt_file,
-    decrypt_bytes,
-    encrypt_block,
-    encrypt_file,
-    encrypt_bytes,
-)
+from cifras_modernas import DES
 
 
 def teste_vetor_oficial_des() -> None:
@@ -19,12 +12,12 @@ def teste_vetor_oficial_des() -> None:
     mensagem = bytes.fromhex("0123456789ABCDEF")
     esperado = bytes.fromhex("85E813540F0AB405")
 
-    cifrado = encrypt_block(mensagem, chave)
+    cifrado = DES.encrypt_block(mensagem, chave)
     assert cifrado == esperado, (
         f"Falha no vetor DES: esperado {esperado.hex().upper()}, "
         f"obtido {cifrado.hex().upper()}"
     )
-    assert decrypt_block(cifrado, chave) == mensagem
+    assert DES.decrypt_block(cifrado, chave) == mensagem
     print("[OK] Vetor de referência DES validado.")
     print(f"     Texto claro : {mensagem.hex().upper()}")
     print(f"     Chave       : {chave.hex().upper()}")
@@ -36,8 +29,8 @@ def exemplo_missao() -> None:
     mensagem = "FLAMENGO"
     chave = "SEGREDOS"  # 8 caracteres ASCII = 8 bytes
 
-    cifrado = encrypt_block(mensagem, chave)
-    recuperado = decrypt_block(cifrado, chave)
+    cifrado = DES.encrypt_block(mensagem, chave)
+    recuperado = DES.decrypt_block(cifrado, chave)
 
     print("\nEXEMPLO DIDÁTICO: DES")
     print(f"Mensagem original : {mensagem}")
@@ -66,8 +59,8 @@ def teste_arquivo() -> None:
         arquivo_recuperado = pasta / "documento_recuperado.txt"
 
         arquivo_original.write_bytes(conteudo_original)
-        encrypt_file(arquivo_original, arquivo_cifrado, chave)
-        decrypt_file(arquivo_cifrado, arquivo_recuperado, chave)
+        DES.encrypt_file(arquivo_original, arquivo_cifrado, chave)
+        DES.decrypt_file(arquivo_cifrado, arquivo_recuperado, chave)
 
         bytes_originais = arquivo_original.read_bytes()
         bytes_recuperados = arquivo_recuperado.read_bytes()
@@ -86,8 +79,8 @@ def teste_dados_em_memoria() -> None:
     """Confere também a API de cifragem de bytes."""
     original = b"Contrato confidencial do SecureDocs."
     chave = b"SEGREDOS"
-    cifrado = encrypt_bytes(original, chave)
-    recuperado = decrypt_bytes(cifrado, chave)
+    cifrado = DES.encrypt_bytes(original, chave)
+    recuperado = DES.decrypt_bytes(cifrado, chave)
     assert recuperado == original
     print("[OK] Teste de encrypt_bytes/decrypt_bytes validado.")
 
