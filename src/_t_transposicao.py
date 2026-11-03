@@ -4,7 +4,7 @@ texto = "TRANSFERIR DOCUMENTO PARA SERVIDOR CENTRAL"
 chave = 5
 
 cifrado = transposicao(texto, chave, True)
-decifrado = transposicao(cifrado, chave, True)
+decifrado = transposicao(cifrado, chave, False)
 
 print("texto original:")
 print(texto)

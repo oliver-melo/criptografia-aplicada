@@ -86,7 +86,6 @@ def substituicao(texto: str, chave: str, modo: bool) -> str:
     modo False decifra
     """
 
-
     if not isinstance(texto, str) or not isinstance(chave, str):
         raise ValueError("texto e chave devem ser strings")
 
@@ -352,7 +351,6 @@ def vigenere(texto: str, chave: str, modo: bool, alfabeto: str = ALFABETO) -> st
 
         return [alfabeto.index(c) for c in chave_normalizada]
 
-
     def _aplicar_vigenere(texto: str, chave: str, alfabeto: str, sinal: int) -> str:
 
         deslocamentos = _preparar_chave_vigenere(chave, alfabeto)
@@ -374,7 +372,6 @@ def vigenere(texto: str, chave: str, modo: bool, alfabeto: str = ALFABETO) -> st
 
         return "".join(resultado)
 
-
     def cifrar_vigenere(texto: str, chave: str, alfabeto: str = ALFABETO) -> str:
         """
         Cifra de Vigenère: E(x_i) = (x_i + k_(i mod t)) mod m
@@ -383,7 +380,6 @@ def vigenere(texto: str, chave: str, modo: bool, alfabeto: str = ALFABETO) -> st
 
         return _aplicar_vigenere(texto, chave, alfabeto, +1)
 
-
     def decifrar_vigenere(texto: str, chave: str, alfabeto: str = ALFABETO) -> str:
         """
         Inversa de Vigenère: D(y_i) = (y_i - k_(i mod t)) mod m
@@ -391,7 +387,6 @@ def vigenere(texto: str, chave: str, modo: bool, alfabeto: str = ALFABETO) -> st
         """
 
         return _aplicar_vigenere(texto, chave, alfabeto, -1)
-
 
     if modo:
         return cifrar_vigenere(texto, chave, alfabeto)
